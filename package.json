@@ -1,0 +1,58 @@
+{
+    "name": "vue3-start-template",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite --mode development",
+        "build-dev": "vite build --mode development",
+        "build-test": "vite build --mode test",
+        "build-pro": "vite build  --mode production",
+        "preview": "vite preview",
+        "cz": "cz",
+        "prepare": "husky"
+    },
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-git"
+        }
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
+    },
+    "dependencies": {
+        "@vueuse/core": "^10.11.0",
+        "animate.css": "^4.1.1",
+        "axios": "^1.7.2",
+        "commitizen": "^4.3.0",
+        "element-plus": "^2.7.6",
+        "pinia": "^2.1.7",
+        "sass": "^1.77.6",
+        "vue": "^3.4.29",
+        "vue-i18n": "9",
+        "vue-router": "^4.4.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.0.5",
+        "autoprefixer": "^10.4.19",
+        "cz-git": "^1.7.1",
+        "eslint": "9.x",
+        "eslint-plugin-vue": "^9.26.0",
+        "globals": "^15.6.0",
+        "husky": "^9.1.2",
+        "lint-staged": "^15.2.7",
+        "postcss": "^8.4.40",
+        "prettier": "3.3.3",
+        "rollup-plugin-visualizer": "^5.12.0",
+        "tailwindcss": "^3.4.7",
+        "typescript": "^5.2.2",
+        "typescript-eslint": "^7.14.1",
+        "unplugin-auto-import": "^0.18.2",
+        "unplugin-vue-components": "^0.27.3",
+        "vite": "^5.3.1",
+        "vite-plugin-html": "^3.2.2",
+        "vite-plugin-vue-devtools": "1.0.0-rc.5",
+        "vue-eslint-parser": "^9.4.3",
+        "vue-tsc": "^2.0.21"
+    }
+}
