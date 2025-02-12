@@ -2,6 +2,7 @@
 import { useIntersectionObserver } from '@vueuse/core'
 import { ref } from 'vue'
 interface IProps {
+    /** 配合animate.css使用，效果更佳 */
     animateCalss?: string // 配合animate.css使用，效果更佳
     duration?: string // 动画持续时间
     once?: boolean // 动画是否只播放一次
