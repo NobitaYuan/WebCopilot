@@ -9,13 +9,13 @@ const routes: RouteRecordRaw[] = [
         path: '/index',
         name: 'index',
         meta: { title: 'Taco' },
-        component: () => import('@/views/index/index.vue'),
+        component: () => import('@/popup/views/index/index.vue'),
     },
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         meta: { title: '404' },
-        component: () => import('@/views/error/404View.vue'),
+        component: () => import('@/popup/views/error/404View.vue'),
     },
 ]
 

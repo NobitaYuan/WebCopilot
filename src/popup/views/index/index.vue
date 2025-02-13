@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import demoBox from '@/components/demoBox.vue'
+import demoBox from '@/popup/components/demoBox.vue'
 </script>
 
 <template>

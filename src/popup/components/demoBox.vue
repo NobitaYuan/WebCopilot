@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import viewport_animation from '@/components/viewport_animation.vue'
+import viewport_animation from '@/popup/components/viewport_animation.vue'
 import { curLang } from '@/i18n'
-import { useDarkModeStore } from '@/stores'
+import { useDarkModeStore } from '@/popup/stores'
 
 const darkModeStore = useDarkModeStore()
 const dev = import.meta.env

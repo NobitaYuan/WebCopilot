@@ -6,6 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import { CRX_OUTDIR } from './globalConfig'
 
 export default defineConfig((env: ConfigEnv) => {
     const { mode } = env
@@ -36,7 +37,7 @@ export default defineConfig((env: ConfigEnv) => {
             }),
             visualizer({
                 filename: 'boundleView.html', //分析图生成的文件名
-                open: true, //如果存在本地服务端口，将在打包后自动展示
+                open: false, //如果存在本地服务端口，将在打包后自动展示
             }),
         ],
         resolve: {
@@ -55,6 +56,7 @@ export default defineConfig((env: ConfigEnv) => {
             路径就是该文件的请求路径，然后在后缀加上.map即可
             */
             sourcemap: true,
+            outDir: CRX_OUTDIR,
         },
     }
 })

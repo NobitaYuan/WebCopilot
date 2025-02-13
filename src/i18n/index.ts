@@ -1,4 +1,4 @@
-import { getFromLocal, saveToLocal } from '@/utils'
+import { getFromLocal, saveToLocal } from '@/popup/utils'
 import { createI18n } from 'vue-i18n'
 import zhCn from './locales/zh-cn.json'
 import en from './locales/en.json'

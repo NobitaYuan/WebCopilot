@@ -4,10 +4,8 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev": "vite --mode development",
-        "build-dev": "vite build --mode development",
-        "build-test": "vite build --mode test",
-        "build-pro": "vite build  --mode production",
+        "dev": "vite --mode development -c vite.popup.config.js",
+        "build": "vite build --mode development -c vite.popup.config.js && vite build -c vite.content.config.js && vite build -c vite.background.config.js && node build.js",
         "preview": "vite preview",
         "cz": "cz",
         "prepare": "husky",
