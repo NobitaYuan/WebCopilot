@@ -8,6 +8,9 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { CRX_OUTDIR } from './globalConfig'
 
+/**
+ * 配置文章：https://mp.weixin.qq.com/s/sQI1gvMFu8W2SrWNm0WvYw
+ */
 export default defineConfig((env: ConfigEnv) => {
     const { mode } = env
     // 环境变量

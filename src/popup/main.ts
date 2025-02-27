@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import './assets/style/main.css'
+import '@/common/style/main.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import App from './popup.vue'
 import router from './router'
