@@ -158,6 +158,8 @@ html,
 body {
     color: #0f0f27;
     overflow: auto;
+    width: 420px;
+    height: 510px;
 }
 #app {
     /* min-width: 1200px; */

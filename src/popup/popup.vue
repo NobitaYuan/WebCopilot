@@ -2,6 +2,10 @@
 import { ElConfigProvider } from 'element-plus'
 import { zhCn } from 'element-plus/es/locale/index.mjs'
 import { RouterView } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
+console.log('router', router, route)
 </script>
 
 <template>

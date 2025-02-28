@@ -6,6 +6,11 @@ const routes: RouteRecordRaw[] = [
         redirect: '/index',
     },
     {
+        path: '/index.html',
+        name: '/index.html',
+        redirect: '/index',
+    },
+    {
         path: '/index',
         name: 'index',
         meta: { title: 'Taco' },

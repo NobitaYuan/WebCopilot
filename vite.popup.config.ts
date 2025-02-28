@@ -7,6 +7,8 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { CRX_OUTDIR } from './globalConfig'
+import path from 'path'
+// import hotReloadExtension from 'hot-reload-extension-vite'
 
 /**
  * 配置文章：https://mp.weixin.qq.com/s/sQI1gvMFu8W2SrWNm0WvYw
@@ -42,10 +44,15 @@ export default defineConfig((env: ConfigEnv) => {
                 filename: 'boundleView.html', //分析图生成的文件名
                 open: false, //如果存在本地服务端口，将在打包后自动展示
             }),
+            // hotReloadExtension({
+            //     log: true,
+            //     backgroundPath: 'src/background/index.ts', // src/pages/background/index.ts
+            // }),
         ],
         resolve: {
             alias: {
-                '@': '/src',
+                // '@': '/src',
+                '@': path.resolve(__dirname, 'src'),
             },
         },
         server: {

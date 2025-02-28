@@ -9,11 +9,14 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "css": ["content.css"],
             "js": ["content.js"],
             "run_at": "document_end"
         }
     ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; style-src 'unsafe-inline' ; img-src 'self' data: https:; connect-src 'self' https:",
+        "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' ; child-src 'self';"
+    },
     "permissions": ["storage", "declarativeContent"],
     "host_permissions": [],
     "web_accessible_resources": [
