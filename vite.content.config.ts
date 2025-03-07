@@ -5,6 +5,7 @@ import { CRX_CONTENT_OUTDIR } from './globalConfig'
 import type { LibraryFormats } from 'vite'
 import { ConfigEnv, loadEnv } from 'vite'
 import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig((env: ConfigEnv) => {
@@ -14,6 +15,9 @@ export default defineConfig((env: ConfigEnv) => {
     return {
         plugins: [
             vue(),
+            AutoImport({
+                imports: ['vue'],
+            }),
             // 这里是必须的，因为打包时，会根据项目中el的使用情况，自动导入组件
             Components({
                 resolvers: [ElementPlusResolver()],
