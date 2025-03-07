@@ -41,6 +41,9 @@ importers:
             '@eslint/js':
                 specifier: ^9.20.0
                 version: 9.20.0
+            '@types/chrome':
+                specifier: ^0.0.308
+                version: 0.0.308
             '@vitejs/plugin-vue':
                 specifier: ^5.2.1
                 version: 5.2.1(vite@5.4.14(@types/node@20.14.9)(sass@1.84.0)(terser@5.31.3))(vue@3.5.13(typescript@5.7.3))
@@ -806,6 +809,9 @@ packages:
     '@sxzz/popperjs-es@2.11.7':
         resolution: { integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ== }
 
+    '@types/chrome@0.0.308':
+        resolution: { integrity: sha512-H5VF01xhUQHwNy8Hfu4khwHJncyckw7IEricOqrIBan8gsDXnBu5A3qJ15him8Kx+YY6lNkrXZGJajEUSGRsRQ== }
+
     '@types/conventional-commits-parser@5.0.0':
         resolution: { integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ== }
 
@@ -814,6 +820,15 @@ packages:
 
     '@types/estree@1.0.6':
         resolution: { integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw== }
+
+    '@types/filesystem@0.0.36':
+        resolution: { integrity: sha512-vPDXOZuannb9FZdxgHnqSwAG/jvdGM8Wq+6N4D/d80z+D4HWH+bItqsZaVRQykAn6WEVeEkLm2oQigyHtgb0RA== }
+
+    '@types/filewriter@0.0.33':
+        resolution: { integrity: sha512-xFU8ZXTw4gd358lb2jw25nxY9QAgqn2+bKKjKOYfNCzN4DKCFetK7sPtrlpg66Ywe3vWY9FNxprZawAh9wfJ3g== }
+
+    '@types/har-format@1.2.16':
+        resolution: { integrity: sha512-fluxdy7ryD3MV6h8pTfTYpy/xQzCFC7m89nOH9y94cNqJ1mDIDPut7MnRHI3F6qRmh/cT2fUjG1MLdCNb4hE9A== }
 
     '@types/json-schema@7.0.15':
         resolution: { integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA== }
@@ -3775,6 +3790,11 @@ snapshots:
 
     '@sxzz/popperjs-es@2.11.7': {}
 
+    '@types/chrome@0.0.308':
+        dependencies:
+            '@types/filesystem': 0.0.36
+            '@types/har-format': 1.2.16
+
     '@types/conventional-commits-parser@5.0.0':
         dependencies:
             '@types/node': 20.14.9
@@ -3783,6 +3803,14 @@ snapshots:
     '@types/estree@1.0.5': {}
 
     '@types/estree@1.0.6': {}
+
+    '@types/filesystem@0.0.36':
+        dependencies:
+            '@types/filewriter': 0.0.33
+
+    '@types/filewriter@0.0.33': {}
+
+    '@types/har-format@1.2.16': {}
 
     '@types/json-schema@7.0.15': {}
 

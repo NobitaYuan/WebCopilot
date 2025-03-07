@@ -7,7 +7,6 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { CRX_OUTDIR } from './globalConfig'
-import path from 'path'
 // import hotReloadExtension from 'hot-reload-extension-vite'
 
 /**
@@ -38,7 +37,8 @@ export default defineConfig((env: ConfigEnv) => {
             }),
             Components({
                 resolvers: [ElementPlusResolver()],
-                dts: 'src/types/components.d.ts',
+                // 暂时不需要生成声明文件，因为ts.config.ts中已经配置全局类型了
+                // dts: 'src/types/components.d.ts',
             }),
             visualizer({
                 filename: 'boundleView.html', //分析图生成的文件名
@@ -51,8 +51,8 @@ export default defineConfig((env: ConfigEnv) => {
         ],
         resolve: {
             alias: {
-                // '@': '/src',
-                '@': path.resolve(__dirname, 'src'),
+                '@': '/src',
+                // '@': path.resolve(__dirname, 'src'),
             },
         },
         server: {

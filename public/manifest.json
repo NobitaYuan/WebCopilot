@@ -10,6 +10,7 @@
         {
             "matches": ["<all_urls>"],
             "js": ["content.js"],
+            "css": ["content.css"],
             "run_at": "document_end"
         }
     ],
@@ -26,6 +27,10 @@
         },
         {
             "resources": ["insert.js"],
+            "matches": ["<all_urls>"]
+        },
+        {
+            "resources": ["manifest.json", "*.css", "*.js"],
             "matches": ["<all_urls>"]
         }
     ],

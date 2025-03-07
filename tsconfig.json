@@ -11,7 +11,7 @@
         "skipLibCheck": true,
         "allowSyntheticDefaultImports": true,
         "lib": ["esnext", "dom"],
-        "types": ["vite/client", "element-plus/global"],
+        "types": ["vite/client", "element-plus/global", "@types/chrome"],
         "noEmit": true,
         "baseUrl": "./",
         "paths": {

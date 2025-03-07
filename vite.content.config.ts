@@ -3,10 +3,22 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { CRX_CONTENT_OUTDIR } from './globalConfig'
 import type { LibraryFormats } from 'vite'
+import { ConfigEnv, loadEnv } from 'vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-export default defineConfig(() => {
+export default defineConfig((env: ConfigEnv) => {
+    const { mode } = env
+    // 环境变量
+    const envVar = loadEnv(mode, process.cwd())
     return {
-        plugins: [vue()],
+        plugins: [
+            vue(),
+            // 这里是必须的，因为打包时，会根据项目中el的使用情况，自动导入组件
+            Components({
+                resolvers: [ElementPlusResolver()],
+            }),
+        ],
         resolve: {
             alias: {
                 '@': '/src',
@@ -32,6 +44,10 @@ export default defineConfig(() => {
                     },
                 },
             },
+        },
+        // 定义全局变量，这里定义全局变量是因为content.js在执行中拿不到process.env
+        define: {
+            'process.env': envVar,
         },
     }
 })
