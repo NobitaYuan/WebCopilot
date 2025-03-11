@@ -21,9 +21,11 @@ onMounted(() => {
 */
 .content_container {
     position: fixed;
+    // 最大值
     z-index: 2147483647;
     font-size: 12px;
     font-weight: 500;
+    user-select: none;
     cursor: pointer;
     border-radius: 10px;
     background: url('chrome-extension://__MSG_@@extension_id__/images/app.png');
@@ -40,8 +42,7 @@ onMounted(() => {
         background-color: #dbdeff;
     }
     &.rise_up {
-        --animate-duration: 0.3s;
-        animation: up var(--animate-duration) ease-in-out;
+        animation: up 0.3s ease-in-out;
         @keyframes up {
             0% {
                 opacity: 0;
