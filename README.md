@@ -2,7 +2,7 @@
   <a href="https://github.com/NobitaYuan/WebCopilot" target="_blank">WebCopilot</a>
 </h1>
 
-## 📄 是什么
+## 📄 WebCopilot是什么?
 
 WebCopilot 是一个基于 Vue3 + TS + Vite + Manifest V3 的开源浏览器插件
 
@@ -26,7 +26,7 @@ pnpm build
 2. 打开开发人员模式
 3. 点击加载解压缩的扩展导入构建后的build文件即可
 
-## 📄 功能规划
+## 📝 功能规划
 
 -   [x] 基础的工程化配置
 -   [x] 划词气泡显示
