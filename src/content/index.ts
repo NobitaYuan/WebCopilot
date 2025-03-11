@@ -6,7 +6,7 @@ import { insertStylesheet } from './utils'
 const eId = 'webcopilot_crx_container'
 const crxApp = document.createElement('div')
 crxApp.id = eId
-document.body.append(crxApp)
+document.documentElement.append(crxApp)
 const app = createApp(Content)
 
 // 为容器创建一个shadowRoot, 以实现样式隔离
@@ -15,4 +15,4 @@ app.mount(shadowEl as unknown as Element)
 
 // 将content.css转为style标签插入到shadowRoot
 insertStylesheet(shadowEl)
-console.log('%ccontent.js is Running!', 'color:#1e80ff;')
+console.log('%cContent.js is Running！', 'color:#1e80ff;')
