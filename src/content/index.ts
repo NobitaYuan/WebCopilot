@@ -6,7 +6,7 @@ import { insertStylesheet } from './utils'
 const eId = 'webcopilot_crx_container'
 const crxApp = document.createElement('div')
 crxApp.id = eId
-document.body.appendChild(crxApp)
+document.body.append(crxApp)
 const app = createApp(Content)
 
 // 为容器创建一个shadowRoot, 以实现样式隔离
