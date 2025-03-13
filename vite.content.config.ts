@@ -26,6 +26,7 @@ export default defineConfig((env: ConfigEnv) => {
         resolve: {
             alias: {
                 '@': '/src',
+                '@content': '/src/content',
             },
         },
         server: {

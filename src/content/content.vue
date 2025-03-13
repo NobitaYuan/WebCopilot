@@ -1,17 +1,34 @@
 <script lang="ts" setup>
 import { zhCn } from 'element-plus/es/locale/index.mjs'
-import { useBubbleShow } from './hooks'
+import { useSelectionStore } from '@content/store/index'
+import dialogBox from '@content/components/dialog.vue'
 
-const { addEvent, bubblePositionStyle, isBubbleShow } = useBubbleShow()
+const selectionStore = useSelectionStore()
+
 onMounted(() => {
-    addEvent()
+    selectionStore.addEvent()
+})
+
+const bubblePositionStyle = computed(() => {
+    return {
+        left: selectionStore.state.bubblePosition.left + 'px',
+        top: selectionStore.state.bubblePosition.top + 'px',
+        width: selectionStore.bubbleWidth + 'px',
+        height: selectionStore.bubbleHeight + 'px',
+    }
 })
 </script>
 
 <template>
-    <div :style="bubblePositionStyle" class="content_container rise_up" v-show="isBubbleShow">
+    <div
+        :style="bubblePositionStyle"
+        class="content_container rise_up"
+        v-show="selectionStore.state.isBubbleShow"
+        @click="selectionStore.toggleDialogShow(true)"
+    >
         <el-config-provider :locale="zhCn"> </el-config-provider>
     </div>
+    <dialogBox />
 </template>
 
 <style lang="scss" scoped>
@@ -21,8 +38,8 @@ onMounted(() => {
 */
 .content_container {
     position: fixed;
-    // 最大值
-    z-index: 2147483647;
+    // 最大值 - 1
+    z-index: 2147483646;
     font-size: 12px;
     font-weight: 500;
     user-select: none;
