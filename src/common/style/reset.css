@@ -89,6 +89,7 @@ summary,
 time,
 mark,
 audio,
+button,
 video {
     margin: 0;
     padding: 0;
@@ -116,10 +117,6 @@ menu,
 nav,
 section {
     display: block;
-}
-
-body {
-    line-height: 1;
 }
 
 ol,

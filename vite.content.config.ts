@@ -27,6 +27,8 @@ export default defineConfig((env: ConfigEnv) => {
             alias: {
                 '@': '/src',
                 '@content': '/src/content',
+                '@popup': '/src/popup',
+                '@background': '/src/background',
             },
         },
         server: {

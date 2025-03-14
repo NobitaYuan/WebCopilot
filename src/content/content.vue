@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { zhCn } from 'element-plus/es/locale/index.mjs'
 import { useSelectionStore } from '@content/store/index'
-import dialogBox from '@content/components/dialog.vue'
+import dialogBox from '@content/dialog/dialog.vue'
 
 const selectionStore = useSelectionStore()
 
@@ -22,7 +22,7 @@ const bubblePositionStyle = computed(() => {
 <template>
     <div
         :style="bubblePositionStyle"
-        class="content_container rise_up"
+        class="webcopilot_content_container animate_rise_up"
         v-show="selectionStore.state.isBubbleShow"
         @click="selectionStore.toggleDialogShow(true)"
     >
@@ -32,11 +32,7 @@ const bubblePositionStyle = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-/*
-  如果要引用public中的图片资源，请按如下方式使用：
-  background: url('chrome-extension://__MSG_@@extension_id__/images/app.png')
-*/
-.content_container {
+.webcopilot_content_container {
     position: fixed;
     // 最大值 - 1
     z-index: 2147483646;
@@ -45,6 +41,10 @@ const bubblePositionStyle = computed(() => {
     user-select: none;
     cursor: pointer;
     border-radius: 10px;
+    /*
+      如果要引用public中的图片资源，请按如下方式使用：
+      background: url('chrome-extension://__MSG_@@extension_id__/images/app.png')
+    */
     background: url('chrome-extension://__MSG_@@extension_id__/images/app.png');
     background-size: contain;
     background-position: center;

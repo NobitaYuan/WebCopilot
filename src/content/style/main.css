@@ -1,0 +1,5 @@
+@import '@/common/style/tailwind.css';
+@import 'reset.css';
+/* animate.css */
+@import 'animate.css';
+@import '@/common/style/custom.css';

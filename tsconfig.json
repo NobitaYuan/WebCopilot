@@ -16,7 +16,9 @@
         "baseUrl": "./",
         "paths": {
             "@/*": ["src/*"],
-            "@content/*": ["src/content/*"]
+            "@content/*": ["src/content/*"],
+            "@popup/*": ["src/popup/*"],
+            "@background/*": ["src/background/*"]
         },
         "noImplicitAny": true,
         "strictFunctionTypes": true,
