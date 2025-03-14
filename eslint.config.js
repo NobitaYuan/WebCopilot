@@ -45,6 +45,7 @@ export default [
             '@typescript-eslint/no-unused-vars': 2, //变量声明了但未使用
             'no-extra-semi': 2, // 不必要的分号
             'vue/multi-word-component-names': 0, // 组件名必须是多个单词
+            '@typescript-eslint/ban-ts-comment': 0, // 禁止使用 @ts- 注释
         },
     },
 ]

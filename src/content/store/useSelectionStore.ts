@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { fixPosition } from '@content/utils'
+import { fixPosition, getWindowEventControl, addDoubleKeydownEvent } from '@content/utils'
 
 export const useSelectionStore = defineStore('selectionStore', () => {
     const state = reactive({
@@ -18,6 +18,8 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         isDialogShow: false,
         /** dialog位置 */
         dialogPosition: { left: 0, top: 0 },
+        /** 是否在dialog内 */
+        isDialogInner: false,
     })
 
     /* ______________selection_____________ */
@@ -28,6 +30,14 @@ export const useSelectionStore = defineStore('selectionStore', () => {
      */
     function handelSelectionchange() {
         const selection = window.getSelection()
+        // 如果在打开的弹窗内，不处理
+        if (state.isDialogInner) {
+            return
+        }
+        // 打开弹窗后如果没有选中文字，不处理
+        if (state.isDialogShow && !selection.toString().length) {
+            return
+        }
         state.selectedStr = selection.toString()
     }
     /** 鼠标抬起事件 */
@@ -38,20 +48,25 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         if (state.selectedStr.length > 0) {
             toggleBubbleShow(true)
             bubblePositionFix()
-            console.log('selectedStr.value', state)
         } else {
             toggleBubbleShow(false)
         }
     }
+
+    const [addSelectionchangeEvent, removeSelectionchangeEvent] = getWindowEventControl('selectionchange', handelSelectionchange)
+    const [addMouseUpEvent, removeMouseUpEvent] = getWindowEventControl('mouseup', handelMouseUp)
+
     /** 注册事件 */
     const addEvent = () => {
-        document.addEventListener('selectionchange', handelSelectionchange)
-        document.addEventListener('mouseup', handelMouseUp)
+        addSelectionchangeEvent()
+        addMouseUpEvent()
+        addDoubleCtrlEvent()
     }
     /** 移除事件 */
     const removeEvent = () => {
-        document.removeEventListener('selectionchange', handelSelectionchange)
-        document.removeEventListener('mouseup', handelMouseUp)
+        removeSelectionchangeEvent()
+        removeMouseUpEvent()
+        removeDoubleCtrlEvent()
     }
 
     /* ______________气泡_____________ */
@@ -95,16 +110,24 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         // 打开弹窗后，dialog位置修正，并且移除事件，关闭弹窗后，添加事件
         if (state.isDialogShow) {
             dialogPositionFix()
-            removeEvent()
+            removeMouseUpEvent()
+            addEscapeEvent()
         } else {
-            addEvent()
+            addMouseUpEvent()
+            removeEscapeEvent()
         }
     }
+    // esc事件
+    const [addEscapeEvent, removeEscapeEvent] = getWindowEventControl('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            toggleDialogShow(false)
+        }
+    })
     /** dialog位置修正 */
     const dialogPositionFix = () => {
         const { left, top } = fixPosition({
-            x: state.mouseUpPosition.left,
-            y: state.mouseUpPosition.top,
+            x: state.mouseUpPosition.left || window.innerWidth / 2 - dialogWidth / 2,
+            y: state.mouseUpPosition.top || window.innerWidth / 2 - dialogMinHeight / 2,
             domWidth: dialogWidth,
             domHeight: dialogMinHeight,
             padding: 40,
@@ -113,6 +136,12 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         state.dialogPosition.top = top
         state.isBubbleShow = false
     }
+
+    /** 双击开启事件 */
+    const [addDoubleCtrlEvent, removeDoubleCtrlEvent] = addDoubleKeydownEvent('Control', () => {
+        toggleBubbleShow(false)
+        toggleDialogShow(!state.isDialogShow)
+    })
 
     return {
         state,

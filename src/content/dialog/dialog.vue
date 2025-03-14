@@ -13,15 +13,24 @@ const dialogPositionStyle = computed<CSSProperties>(() => {
         minHeight: selectionStore.dialogMinHeight + 'px',
     }
 })
+const inOutDialog = (isIn: boolean) => {
+    selectionStore.state.isDialogInner = isIn
+}
 </script>
 
 <template>
-    <div class="webcopilot_dialog_container animate_rise_up" :style="dialogPositionStyle" v-show="selectionStore.state.isDialogShow">
+    <div
+        class="webcopilot_dialog_container animate_rise_up"
+        v-show="selectionStore.state.isDialogShow"
+        :style="dialogPositionStyle"
+        @mouseenter="inOutDialog(true)"
+        @mouseleave="inOutDialog(false)"
+    >
         <button class="closeBtn" @click="selectionStore.toggleDialogShow(false)">
             <el-icon><Close /></el-icon>
         </button>
         <div>
-            {{ selectionStore }}
+            {{ selectionStore.state.selectedStr }}
         </div>
     </div>
 </template>
