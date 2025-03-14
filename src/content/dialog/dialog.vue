@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useSelectionStore } from '@content/store/index'
 import { CSSProperties } from 'vue'
-import { CloseBold } from '@element-plus/icons-vue'
+import { Close } from '@element-plus/icons-vue'
 
 const selectionStore = useSelectionStore()
 
@@ -18,7 +18,7 @@ const dialogPositionStyle = computed<CSSProperties>(() => {
 <template>
     <div class="webcopilot_dialog_container animate_rise_up" :style="dialogPositionStyle" v-show="selectionStore.state.isDialogShow">
         <button class="closeBtn" @click="selectionStore.toggleDialogShow(false)">
-            <el-icon><CloseBold /></el-icon>
+            <el-icon><Close /></el-icon>
         </button>
         <div>
             {{ selectionStore }}
@@ -43,16 +43,25 @@ const dialogPositionStyle = computed<CSSProperties>(() => {
     padding: 12px;
     .closeBtn {
         position: absolute;
-        right: -50px;
-        top: 8px;
-        width: 32px;
-        height: 32px;
+        right: -38px;
+        top: 0px;
+        width: 30px;
+        height: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 20px;
-        border-radius: 8px;
+        border-radius: 6px;
         cursor: pointer;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #dcdee1;
+        box-shadow:
+            0 5px 15px #00000014,
+            0 2px 4px #0000001c;
+        &:hover {
+            color: var(--el-color-primary);
+        }
     }
 }
 </style>

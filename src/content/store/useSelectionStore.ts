@@ -107,7 +107,7 @@ export const useSelectionStore = defineStore('selectionStore', () => {
             y: state.mouseUpPosition.top,
             domWidth: dialogWidth,
             domHeight: dialogMinHeight,
-            padding: 10,
+            padding: 40,
         })
         state.dialogPosition.left = left
         state.dialogPosition.top = top
