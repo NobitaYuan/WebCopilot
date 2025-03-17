@@ -55,7 +55,8 @@ export const addDoubleKeydownEvent = (
             if (event.key === key) {
                 const currentTime = Date.now()
                 // 检查两次按下键的时间间隔是否在阈值内
-                if (currentTime - lastKeyPressTime < doubleKeydownInterval) {
+                const gapTime = currentTime - lastKeyPressTime
+                if (gapTime < doubleKeydownInterval && gapTime > 100) {
                     // 触发双击事件
                     trigger(event)
                     // 重置上一次按下时间

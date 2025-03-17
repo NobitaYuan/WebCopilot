@@ -6,10 +6,7 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         /** 选中的文字 */
         selectedStr: '',
         /** 文本选中后，鼠标抬起时的位置 */
-        mouseUpPosition: {
-            left: 0,
-            top: 0,
-        },
+        mouseUpPosition: { left: 0, top: 0 },
         /** 气泡显示 */
         isBubbleShow: false,
         /** 气泡位置 */
@@ -24,16 +21,16 @@ export const useSelectionStore = defineStore('selectionStore', () => {
 
     /* ______________selection_____________ */
     /**
-     * 文本选中事件
-     * Selection对象
-     * 文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Selection
+     * @name 文本选中事件
+     * - Selection对象
+     * - 文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Selection
      */
     function handelSelectionchange() {
-        const selection = window.getSelection()
         // 如果在打开的弹窗内，不处理
         if (state.isDialogInner) {
             return
         }
+        const selection = window.getSelection()
         // 打开弹窗后如果没有选中文字，不处理
         if (state.isDialogShow && !selection.toString().length) {
             return
@@ -44,7 +41,7 @@ export const useSelectionStore = defineStore('selectionStore', () => {
     function handelMouseUp(e: MouseEvent) {
         state.mouseUpPosition.left = e.clientX
         state.mouseUpPosition.top = e.clientY
-
+        // 选择文本后，显示气泡
         if (state.selectedStr.length > 0) {
             toggleBubbleShow(true)
             bubblePositionFix()
@@ -52,8 +49,9 @@ export const useSelectionStore = defineStore('selectionStore', () => {
             toggleBubbleShow(false)
         }
     }
-
+    //  文本选中事件
     const [addSelectionchangeEvent, removeSelectionchangeEvent] = getWindowEventControl('selectionchange', handelSelectionchange)
+    //  鼠标抬起事件
     const [addMouseUpEvent, removeMouseUpEvent] = getWindowEventControl('mouseup', handelMouseUp)
 
     /** 注册事件 */
@@ -98,21 +96,29 @@ export const useSelectionStore = defineStore('selectionStore', () => {
     }
 
     /* ______________dialog_____________ */
-
     /** dialog宽高 */
     const dialogWidth = 450
-    const dialogMinHeight = 200
+    let dialogMinHeight = 200
+    /** 设置dialog高 */
+    const setDialogMinheight = (h: number) => {
+        if (!h) return (dialogMinHeight = 200)
+        dialogMinHeight = h
+    }
     /** 切换dialog */
     const toggleDialogShow = (val?: boolean) => {
         if (val === undefined) state.isDialogShow = !state.isDialogShow
         else state.isDialogShow = Boolean(val)
 
-        // 打开弹窗后，dialog位置修正，并且移除事件，关闭弹窗后，添加事件
+        // 打开弹窗后，dialog位置修正，并且移除事件
         if (state.isDialogShow) {
+            // 关闭气泡
+            state.isBubbleShow = false
             dialogPositionFix()
             removeMouseUpEvent()
             addEscapeEvent()
-        } else {
+        }
+        // 关闭弹窗后，添加事件
+        else {
             addMouseUpEvent()
             removeEscapeEvent()
         }
@@ -130,14 +136,12 @@ export const useSelectionStore = defineStore('selectionStore', () => {
             y: state.mouseUpPosition.top || window.innerWidth / 2 - dialogMinHeight / 2,
             domWidth: dialogWidth,
             domHeight: dialogMinHeight,
-            padding: 40,
+            padding: 20,
         })
         state.dialogPosition.left = left
         state.dialogPosition.top = top
-        state.isBubbleShow = false
     }
-
-    /** 双击开启事件 */
+    /** 双击ctrl开启事件 */
     const [addDoubleCtrlEvent, removeDoubleCtrlEvent] = addDoubleKeydownEvent('Control', () => {
         toggleBubbleShow(false)
         toggleDialogShow(!state.isDialogShow)
@@ -155,6 +159,8 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         // dialog
         dialogWidth,
         dialogMinHeight,
+        setDialogMinheight,
         toggleDialogShow,
+        dialogPositionFix,
     }
 })

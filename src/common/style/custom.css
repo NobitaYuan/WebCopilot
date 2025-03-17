@@ -1,7 +1,7 @@
 .animate_rise_up {
     animation: up 0.3s ease-in-out;
 }
-@keyframes up {
+@keyframes animate_up {
     0% {
         opacity: 0;
         transform: translateY(30px);
@@ -9,5 +9,19 @@
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.animate_rise_down {
+    animation: down 0.3s ease-in-out;
+}
+@keyframes animate_down {
+    0% {
+        opacity: 0;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-30px);
     }
 }

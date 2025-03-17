@@ -1,5 +1,28 @@
 .webcopilot_dialog_container,
 .webcopilot_content_container {
+    color: var(--el-text-color-primary);
+    /* 滚动条样式 */
+    --sb-track-color: #f3f3f3;
+    --sb-thumb-color: #0003;
+    --sb-size: 4px;
+    *::-webkit-scrollbar {
+        width: var(--sb-size);
+        height: var(--sb-size);
+    }
+    *::-webkit-scrollbar-track {
+        background: var(--sb-track-color);
+        border-radius: 3px;
+    }
+    *::-webkit-scrollbar-thumb {
+        background: var(--sb-thumb-color);
+        border-radius: 3px;
+    }
+    *::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+        background-color: #0000004d;
+    }
+
+    /* 重置 */
     *,
     *::before,
     *::after {
@@ -144,5 +167,13 @@
     }
     path {
         fill: currentColor;
+    }
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    .webcopilot_dialog_container {
+        * {
+            scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+        }
     }
 }
