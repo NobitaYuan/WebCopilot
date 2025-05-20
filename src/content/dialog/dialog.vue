@@ -28,7 +28,7 @@ watch(
         const { height } = dialogRef.value.getBoundingClientRect()
         selectionStore.setDialogMinheight(height)
         selectionStore.dialogPositionFix()
-        console.log('fixh', height, selectionStore.state)
+        // console.log('fixh', height, selectionStore.state)
     },
 )
 </script>

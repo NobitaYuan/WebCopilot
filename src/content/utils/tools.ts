@@ -45,12 +45,12 @@ let lastKeyPressTime = 0
  */
 export const addDoubleKeydownEvent = (
     key: string,
-    trigger: (event: DocumentEventMap['keydown']) => unknown,
+    trigger: (event: DocumentEventMap['keyup']) => unknown,
     doubleKeydownInterval: number = 300,
     options?: boolean | AddEventListenerOptions,
 ): [() => void, () => void] => {
     return getWindowEventControl(
-        'keydown',
+        'keyup',
         (event) => {
             if (event.key === key) {
                 const currentTime = Date.now()

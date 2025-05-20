@@ -1,6 +1,6 @@
 {
     "name": "WebCopilot",
-    "description": "your copilot for web",
+    "description": "优化您的浏览器体验",
     "version": "0.0.1",
     "manifest_version": 3,
     "background": {
@@ -10,8 +10,7 @@
         {
             "matches": ["<all_urls>"],
             "js": ["content.js"],
-            "css": ["content.css"],
-            "run_at": "document_end"
+            "run_at": "document_idle"
         }
     ],
     "content_security_policy": {
