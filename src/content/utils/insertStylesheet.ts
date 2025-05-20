@@ -5,14 +5,11 @@
  */
 export async function insertStylesheet(parentElement: ShadowRoot | HTMLElement) {
     const cssName = 'content.css'
-    fetch(chrome.runtime.getURL(cssName))
-        .then((v) => v.text())
-        .then((themes) => {
-            // console.log('themes', themes)
-            const childElement = document.createElement('style')
-            childElement.textContent = themes
-            parentElement.insertBefore(childElement, parentElement.firstChild)
-        })
+    const res = await fetch(chrome.runtime.getURL(cssName))
+    const css = await res.text()
+    const styleEl = document.createElement('style')
+    styleEl.textContent = css
+    parentElement.insertBefore(styleEl, parentElement.firstChild)
 
     // const config = await (await fetch(chrome.runtime.getURL('manifest.json'))).json()
     // if (!config.content_scripts && !config.content_scripts.length) return
