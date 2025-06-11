@@ -36,6 +36,10 @@ export const useSelectionStore = defineStore('selectionStore', () => {
             return
         }
         state.selectedStr = selection.toString()
+        // 没有内容后关闭弹窗, NOTE: 此代码为处理[selectionchange]事件在[mouseup]后触发，导致没有关闭气泡的问题
+        if (state.selectedStr.length === 0) {
+            toggleBubbleShow(false)
+        }
     }
     /** 鼠标抬起事件 */
     function handelMouseUp(e: MouseEvent) {
@@ -48,6 +52,7 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         } else {
             toggleBubbleShow(false)
         }
+        console.log('handelMouseUp')
     }
     //  文本选中事件
     const [addSelectionchangeEvent, removeSelectionchangeEvent] = getWindowEventControl('selectionchange', handelSelectionchange)

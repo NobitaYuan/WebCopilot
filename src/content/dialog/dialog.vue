@@ -2,13 +2,14 @@
 import { useSelectionStore } from '@content/store/index'
 import { CSSProperties } from 'vue'
 import { Close } from '@element-plus/icons-vue'
+import { useCursorMove } from '../hooks'
 
 const selectionStore = useSelectionStore()
 
 const dialogPositionStyle = computed<CSSProperties>(() => {
     return {
-        left: selectionStore.state.dialogPosition.left + 'px',
-        top: selectionStore.state.dialogPosition.top + 'px',
+        left: selectionStore.state.dialogPosition.left + moveX.value + 'px',
+        top: selectionStore.state.dialogPosition.top + moveY.value + 'px',
         width: selectionStore.dialogWidth + 'px',
         minHeight: selectionStore.dialogMinHeight + 'px',
     }
@@ -31,6 +32,9 @@ watch(
         // console.log('fixh', height, selectionStore.state)
     },
 )
+
+const dragRef = ref<HTMLElement>()
+const { moveX, moveY } = useCursorMove(dragRef)
 </script>
 
 <template>
@@ -44,6 +48,7 @@ watch(
     >
         <div class="hd">
             <div class="logo">WebCopilot</div>
+            <div class="drag" ref="dragRef"></div>
             <button class="closeBtn" @click="selectionStore.toggleDialogShow(false)">
                 <el-icon><Close /></el-icon>
             </button>
@@ -63,10 +68,8 @@ watch(
     z-index: 2147483647;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow:
-        0 5px 15px #00000014,
-        0 2px 4px #0000001c;
-    transition: all 0.3s ease-out;
+    box-shadow: rgba(0, 0, 0, 0.8) 0 4px 23px -6px;
+    // transition: all 0.3s ease-out;
     border: 1px solid #dcdee1;
     font-weight: normal;
     font-size: 16px;
@@ -79,6 +82,12 @@ watch(
         display: flex;
         justify-content: space-between;
         .logo {
+        }
+        .drag {
+            cursor: move;
+            flex: 1;
+            // background: var(--el-color-primary-light-9);
+            margin-left: 10px;
         }
         .closeBtn {
             display: flex;

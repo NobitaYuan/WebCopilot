@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { zhCn } from 'element-plus/es/locale/index.mjs'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { useSelectionStore } from '@content/store/index'
 import dialogBox from '@content/dialog/dialog.vue'
 

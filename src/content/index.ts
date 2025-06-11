@@ -22,6 +22,6 @@ const shadowEl: ShadowRoot = crxApp.attachShadow({ mode: 'open' })
 app.mount(shadowEl as unknown as Element)
 
 // 将content.css转为style标签插入到shadowRoot
-insertStylesheet(shadowEl)
-
-console.log('%cContent.js is Running！', 'color:#1e80ff;')
+insertStylesheet(shadowEl).then(() => {
+    console.log('%cWebCopilot is Running！', 'color:#1e80ff;font-weight:600;font-size:18px;')
+})
