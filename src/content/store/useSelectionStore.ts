@@ -52,7 +52,6 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         } else {
             toggleBubbleShow(false)
         }
-        console.log('handelMouseUp')
     }
     //  文本选中事件
     const [addSelectionchangeEvent, removeSelectionchangeEvent] = getWindowEventControl('selectionchange', handelSelectionchange)
@@ -114,15 +113,15 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         if (val === undefined) state.isDialogShow = !state.isDialogShow
         else state.isDialogShow = Boolean(val)
 
-        // 打开弹窗后，dialog位置修正，并且移除事件
+        // 打开dialog后，位置修正，并且移除事件
         if (state.isDialogShow) {
             // 关闭气泡
-            state.isBubbleShow = false
+            toggleBubbleShow(false)
             dialogPositionFix()
             removeMouseUpEvent()
             addEscapeEvent()
         }
-        // 关闭弹窗后，添加事件
+        // 关闭dialog后，添加事件
         else {
             addMouseUpEvent()
             removeEscapeEvent()

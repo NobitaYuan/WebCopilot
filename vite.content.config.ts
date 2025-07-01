@@ -7,6 +7,7 @@ import { ConfigEnv, loadEnv } from 'vite'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import viteSvgLoader from 'vite-svg-loader'
 
 export default defineConfig((env: ConfigEnv) => {
     const { mode } = env
@@ -15,6 +16,7 @@ export default defineConfig((env: ConfigEnv) => {
     return {
         plugins: [
             vue(),
+            viteSvgLoader(),
             AutoImport({
                 imports: ['vue'],
             }),

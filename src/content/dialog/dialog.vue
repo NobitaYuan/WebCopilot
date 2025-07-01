@@ -3,6 +3,7 @@ import { useSelectionStore } from '@content/store/index'
 import { CSSProperties } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { useCursorMove } from '../hooks'
+import baiduIcon from '@/common/icons/baidu.svg?component'
 
 const selectionStore = useSelectionStore()
 
@@ -54,8 +55,17 @@ const { moveX, moveY } = useCursorMove(dragRef)
             </button>
         </div>
         <div class="bd">
-            <div>
-                {{ selectionStore.state.selectedStr }}
+            <div class="textarea">
+                <el-input
+                    type="textarea"
+                    v-model="selectionStore.state.selectedStr"
+                    clearable
+                    :autosize="{ minRows: 2, maxRows: 5 }"
+                    placeholder="请输入内容"
+                />
+            </div>
+            <div class="operation">
+                <baiduIcon :width="'1em'" :height="'1em'" />
             </div>
         </div>
     </div>
@@ -106,7 +116,12 @@ const { moveX, moveY } = useCursorMove(dragRef)
     .bd {
         overflow: auto;
         flex: 1;
-        line-height: 1.333;
+
+        .textarea {
+        }
+        .operation {
+            font-size: 12px;
+        }
     }
 }
 </style>

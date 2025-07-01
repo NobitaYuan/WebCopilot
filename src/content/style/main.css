@@ -1,5 +1,11 @@
+/* 共用的css */
 @import '@/common/style/tailwind.css';
-@import 'reset.css';
+@import '@/common/style/custom.css';
+
 /* animate.css */
 @import 'animate.css';
-@import '@/common/style/custom.css';
+
+/* 本项目单独的css */
+@import 'el_var.css';
+@import 'el_dark_var.css';
+@import 'reset.css';

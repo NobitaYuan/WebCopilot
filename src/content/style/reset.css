@@ -120,6 +120,7 @@
         /* 字体默认都为平方 */
         font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
         box-sizing: border-box;
+        color: var(--text-color);
     }
 
     /* HTML5 display-role reset for older browsers */
