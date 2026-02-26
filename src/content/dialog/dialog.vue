@@ -75,12 +75,7 @@ const handleSearch = (engine: SearchEngine, keyword: string) => {
                 />
             </div>
             <div class="operation">
-                <SearchEngineBar
-                    v-model="selectionStore.state.selectedEngineId"
-                    :engines="selectionStore.state.searchEngines"
-                    :keyword="selectionStore.state.selectedStr"
-                    @search="handleSearch"
-                />
+                <SearchEngineBar :engines="selectionStore.state.searchEngines" :keyword="selectionStore.state.selectedStr" @search="handleSearch" />
             </div>
         </div>
     </div>

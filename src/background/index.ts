@@ -13,16 +13,25 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     // 处理搜索请求
     if (request.type === 'search') {
-        console.log('🔍 Creating tab with URL:', request.url)
-        chrome.tabs.create({ url: request.url }, (tab) => {
-            if (chrome.runtime.lastError) {
-                console.error('❌ Failed to create tab:', chrome.runtime.lastError)
-                sendResponse({ success: false, error: chrome.runtime.lastError.message })
-            } else {
-                console.log('✅ Tab created successfully:', tab.id)
-                sendResponse({ success: true, tabId: tab.id })
-            }
-        })
+        console.log('🔍 Creating window with URL:', request.url)
+        chrome.windows.create(
+            {
+                url: request.url,
+                type: 'popup',
+                width: 1300,
+                height: 800,
+                top: 180,
+            },
+            (window) => {
+                if (chrome.runtime.lastError) {
+                    console.error('❌ Failed to create window:', chrome.runtime.lastError)
+                    sendResponse({ success: false, error: chrome.runtime.lastError.message })
+                } else {
+                    console.log('✅ Window created successfully:', window.id)
+                    sendResponse({ success: true, windowId: window.id })
+                }
+            },
+        )
         return true // 保持消息通道开放以支持异步响应
     }
 

@@ -7,15 +7,11 @@ import bingIcon from '@/common/icons/bing.svg?component'
 interface Props {
     /** 搜索引擎列表 */
     engines: SearchEngine[]
-    /** 当前选中的搜索引擎 ID */
-    modelValue: string
     /** 搜索关键词 */
     keyword: string
 }
 
 interface Emits {
-    /** 更新选中的搜索引擎 */
-    (e: 'update:modelValue', value: string): void
     /** 执行搜索 */
     (e: 'search', engine: SearchEngine, keyword: string): void
 }
@@ -24,15 +20,14 @@ const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
 // 图标映射（后续可扩展为动态导入）
-const iconMap: Record<string, any> = {
-    baidu: baiduIcon,
-    google: googleIcon,
-    bing: bingIcon,
+const iconMap: Record<string, unknown> = {
+    baiduIcon,
+    googleIcon,
+    bingIcon,
 }
 
 /** 处理搜索引擎点击 */
 const handleEngineClick = (engine: SearchEngine) => {
-    emit('update:modelValue', engine.id)
     if (props.keyword.trim()) {
         emit('search', engine, props.keyword)
     }
@@ -42,13 +37,7 @@ const handleEngineClick = (engine: SearchEngine) => {
 <template>
     <div class="search_engine_bar">
         <div class="engine_list">
-            <div
-                v-for="engine in engines"
-                :key="engine.id"
-                class="engine_item"
-                :class="{ active: modelValue === engine.id }"
-                @click="handleEngineClick(engine)"
-            >
+            <div v-for="engine in engines" :key="engine.id" class="engine_item" @click="handleEngineClick(engine)">
                 <component :is="iconMap[engine.icon]" class="engine_icon" />
                 <span class="engine_name">{{ engine.name }}</span>
             </div>
@@ -81,11 +70,6 @@ const handleEngineClick = (engine: SearchEngine) => {
 
             &:hover {
                 background-color: var(--el-fill-color-light);
-            }
-
-            &.active {
-                background-color: var(--el-color-primary-light-9);
-                border-color: var(--el-color-primary);
             }
 
             .engine_icon {
