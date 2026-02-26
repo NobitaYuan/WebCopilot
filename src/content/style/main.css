@@ -2,10 +2,5 @@
 @import '@/common/style/tailwind.css';
 @import '@/common/style/custom.css';
 
-/* animate.css */
-@import 'animate.css';
-
 /* 本项目单独的css */
-@import 'el_var.css';
-@import 'el_dark_var.css';
 @import 'reset.css';

@@ -1,5 +1,5 @@
 .animate_rise_up {
-    animation: up 0.3s ease-in-out;
+    animation: animate_up 0.3s ease-in-out;
 }
 @keyframes animate_up {
     0% {
@@ -13,7 +13,7 @@
 }
 
 .animate_rise_down {
-    animation: down 0.3s ease-in-out;
+    animation: animate_down 0.3s ease-in-out;
 }
 @keyframes animate_down {
     0% {

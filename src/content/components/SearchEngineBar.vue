@@ -69,7 +69,7 @@ const handleEngineClick = (engine: SearchEngine) => {
             border: 1px solid transparent;
 
             &:hover {
-                background-color: var(--el-fill-color-light);
+                background-color: #f5f7fa;
             }
 
             .engine_icon {

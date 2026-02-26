@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { useSelectionStore } from '@content/store/index'
 import dialogBox from '@content/dialog/dialog.vue'
 import { openSearch } from '@content/utils/search'
@@ -35,10 +34,8 @@ const handleQuickSearch = () => {
         v-show="selectionStore.state.isBubbleShow"
         @click="selectionStore.toggleDialogShow(true)"
     >
-        <el-config-provider :locale="zhCn">
-            <!-- 快捷搜索按钮 -->
-            <div class="quick_search" @click.stop="handleQuickSearch">🔍</div>
-        </el-config-provider>
+        <!-- 快捷搜索按钮 -->
+        <div class="quick_search" @click.stop="handleQuickSearch">🔍</div>
     </div>
     <!-- 交互框 -->
     <dialogBox />
@@ -92,8 +89,8 @@ const handleQuickSearch = () => {
         }
 
         &:hover {
-            background-color: var(--el-color-primary);
-            border-color: var(--el-color-primary);
+            background-color: #409eff;
+            border-color: #409eff;
 
             .search_icon {
                 color: #fff;
