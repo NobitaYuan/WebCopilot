@@ -2,6 +2,7 @@
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { useSelectionStore } from '@content/store/index'
 import dialogBox from '@content/dialog/dialog.vue'
+import { openSearch } from '@content/utils/search'
 
 const selectionStore = useSelectionStore()
 
@@ -17,6 +18,14 @@ const bubblePositionStyle = computed(() => {
         height: selectionStore.bubbleHeight + 'px',
     }
 })
+
+/** 处理快捷搜索按钮点击 */
+const handleQuickSearch = () => {
+    const engine = selectionStore.state.searchEngines.find((e) => e.id === selectionStore.state.searchConfig.defaultEngineId)
+    if (engine && selectionStore.state.selectedStr) {
+        openSearch(engine, selectionStore.state.selectedStr)
+    }
+}
 </script>
 
 <template>
@@ -26,8 +35,12 @@ const bubblePositionStyle = computed(() => {
         v-show="selectionStore.state.isBubbleShow"
         @click="selectionStore.toggleDialogShow(true)"
     >
-        <el-config-provider :locale="zhCn"> </el-config-provider>
+        <el-config-provider :locale="zhCn">
+            <!-- 快捷搜索按钮 -->
+            <div class="quick_search" @click.stop="handleQuickSearch">🔍</div>
+        </el-config-provider>
     </div>
+    <!-- 交互框 -->
     <dialogBox />
 </template>
 
@@ -49,12 +62,45 @@ const bubblePositionStyle = computed(() => {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    border: 1px solid #dcdee1;
+    border: 1px solid #ccc;
     background-color: #fff;
     box-shadow:
         0 5px 15px #00000014,
         0 2px 4px #0000001c;
     transition: all 0.3s ease-out;
+
+    .quick_search {
+        position: absolute;
+        right: -22px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid #dcdee1;
+        transition: all 0.2s;
+
+        .search_icon {
+            width: 12px;
+            height: 12px;
+            color: #666;
+        }
+
+        &:hover {
+            background-color: var(--el-color-primary);
+            border-color: var(--el-color-primary);
+
+            .search_icon {
+                color: #fff;
+            }
+        }
+    }
+
     &:hover {
         background-color: #dbdeff;
     }

@@ -3,18 +3,24 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/',
         name: '/',
-        redirect: '/index',
+        redirect: '/settings',
     },
     {
         path: '/index.html',
         name: '/index.html',
-        redirect: '/index',
+        redirect: '/settings',
     },
     {
         path: '/index',
         name: 'index',
         meta: { title: 'Taco' },
         component: () => import('@/popup/views/index/index.vue'),
+    },
+    {
+        path: '/settings',
+        name: 'settings',
+        meta: { title: '设置' },
+        component: () => import('@/popup/views/setting/index.vue'),
     },
     {
         path: '/:pathMatch(.*)*',

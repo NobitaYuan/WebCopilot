@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 import viewport_animation from '@/popup/components/viewport_animation.vue'
 import { useDarkModeStore } from '@/popup/stores'
+import { useRouter } from 'vue-router'
 
 const darkModeStore = useDarkModeStore()
+const router = useRouter()
 const dev = import.meta.env
+
+/** 跳转到设置页面 */
+const goToSettings = () => {
+    router.push('/settings')
+}
 </script>
 
 <template>
@@ -14,6 +21,9 @@ const dev = import.meta.env
         <div class="flex items-center gap-4">
             <ElSwitch :size="'large'" v-model="darkModeStore.isDark"></ElSwitch>
             黑夜模式
+        </div>
+        <div class="flex items-center gap-4">
+            <ElButton type="primary" @click="goToSettings">设置</ElButton>
         </div>
         <ElCard :header="'环境变量'">
             <div class="flex flex-col gap-[12px] leading-[1.3]">

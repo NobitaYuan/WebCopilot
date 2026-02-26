@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import { fixPosition, getWindowEventControl, addDoubleKeydownEvent } from '@content/utils'
+import { SEARCH_ENGINES, DEFAULT_CONFIG } from '@/common/constants/searchEngines'
+import { loadSearchConfig, saveSearchConfig } from '@content/utils/search'
 
 export const useSelectionStore = defineStore('selectionStore', () => {
     const state = reactive({
@@ -17,6 +19,12 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         dialogPosition: { left: 0, top: 0 },
         /** 是否在dialog内 */
         isDialogInner: false,
+        /** 当前选中的搜索引擎 ID */
+        selectedEngineId: 'baidu',
+        /** 搜索引擎列表 */
+        searchEngines: SEARCH_ENGINES,
+        /** 搜索配置 */
+        searchConfig: DEFAULT_CONFIG,
     })
 
     /* ______________selection_____________ */
@@ -73,9 +81,9 @@ export const useSelectionStore = defineStore('selectionStore', () => {
 
     /* ______________气泡_____________ */
     /** 气泡宽 */
-    const bubbleWidth = 50
+    const bubbleWidth = 30
     /** 气泡高 */
-    const bubbleHeight = 28
+    const bubbleHeight = 30
     /** 切换气泡 */
     const toggleBubbleShow = (val?: boolean) => {
         if (val === undefined) state.isBubbleShow = !state.isBubbleShow
@@ -151,6 +159,21 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         toggleDialogShow(!state.isDialogShow)
     })
 
+    /* ______________搜索配置_____________ */
+    /** 初始化搜索配置 */
+    const initSearchConfig = async () => {
+        const config = await loadSearchConfig()
+        state.searchConfig = config
+        state.selectedEngineId = config.defaultEngineId
+    }
+
+    /** 设置默认搜索引擎 */
+    const setDefaultEngine = async (engineId: string) => {
+        state.searchConfig.defaultEngineId = engineId
+        state.selectedEngineId = engineId
+        await saveSearchConfig(state.searchConfig)
+    }
+
     return {
         state,
         // selection
@@ -166,5 +189,8 @@ export const useSelectionStore = defineStore('selectionStore', () => {
         setDialogMinheight,
         toggleDialogShow,
         dialogPositionFix,
+        // 搜索配置
+        initSearchConfig,
+        setDefaultEngine,
     }
 })

@@ -3,7 +3,9 @@ import { useSelectionStore } from '@content/store/index'
 import { CSSProperties } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { useCursorMove } from '../hooks'
-import baiduIcon from '@/common/icons/baidu.svg?component'
+import SearchEngineBar from '@content/components/SearchEngineBar.vue'
+import { openSearch } from '@content/utils/search'
+import type { SearchEngine } from '@/types/search'
 
 const selectionStore = useSelectionStore()
 
@@ -30,12 +32,20 @@ watch(
         const { height } = dialogRef.value.getBoundingClientRect()
         selectionStore.setDialogMinheight(height)
         selectionStore.dialogPositionFix()
+        // 每次打开弹窗-加载配置
+        selectionStore.initSearchConfig()
         // console.log('fixh', height, selectionStore.state)
     },
 )
 
 const dragRef = ref<HTMLElement>()
 const { moveX, moveY } = useCursorMove(dragRef)
+
+/** 处理搜索事件 */
+const handleSearch = (engine: SearchEngine, keyword: string) => {
+    openSearch(engine, keyword)
+    selectionStore.toggleDialogShow(false)
+}
 </script>
 
 <template>
@@ -65,7 +75,12 @@ const { moveX, moveY } = useCursorMove(dragRef)
                 />
             </div>
             <div class="operation">
-                <baiduIcon :width="'1em'" :height="'1em'" />
+                <SearchEngineBar
+                    v-model="selectionStore.state.selectedEngineId"
+                    :engines="selectionStore.state.searchEngines"
+                    :keyword="selectionStore.state.selectedStr"
+                    @search="handleSearch"
+                />
             </div>
         </div>
     </div>

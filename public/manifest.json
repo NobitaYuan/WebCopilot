@@ -17,8 +17,8 @@
         "extension_pages": "script-src 'self'; object-src 'self'; style-src 'unsafe-inline' ; img-src 'self' data: https:; connect-src 'self' https:",
         "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' ; child-src 'self';"
     },
-    "permissions": ["storage", "declarativeContent"],
-    "host_permissions": [],
+    "permissions": ["storage", "tabs", "declarativeContent"],
+    "host_permissions": ["https://www.baidu.com/*", "https://www.google.com/*", "https://www.bing.com/*"],
     "web_accessible_resources": [
         {
             "resources": ["/images/app.png"],
